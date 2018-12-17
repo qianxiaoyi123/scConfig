@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: api-gateway
+server:
+  port: 2006
+zuul:
+  prefix: /myapi
+  ignored-patterns: /**/hello/**
+  routes:
+    feign-consumer-hello:
+      path: /feign-consumer/hello/**
+      serviceId: feign-consumer-hello
+    feign-consumer:
+      path: /feign-consumer/**
+      serviceId: feign-consumer
+    local:
+      path: /local/**
+      url: forward:/local
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+#zuul.ignored-services=hello-service属性可以忽略掉一个服务比如说我不想给/hello接口路由以按如下方式配置(
+#hello接口路由以按如下方式配置#zuul:
+#zuul:
+#  ignored-patterns: /**/hello/**
+#此外，我们也可以统一的为路由规则增加前缀，设置方式如下：
+#zuul:
+#  prefix: /myapi
+#
+#zuul:
+#  prefix: /myapi
+#  ignored-patterns: /**/hello/**
+#  routes:
+#    local:
+#      path: /local/**
+#      url: forward:/local
