@@ -1,0 +1,255 @@
+Spring 中的 RestTemplate 可以很方便的发送HTTP请求，来看看如何使用
+
+RestTemplate 发送 GET 请求
+RestAPI - 通过@RequestParam接收参数的GET接口
+
+@RequestMapping(value = "accounts/filter", method = RequestMethod.GET)
+public Account filter(@RequestParam String name, @RequestParam Integer age) {
+    return new Account(new Random().nextLong(), name, age, "********");
+}
+
+
+/**
+ * 使用 RestTemplate 发送 GET 请求
+ * RestTemplate 发送 GET 请求时，如果需要传入参数，需要以示例方法 url 的方式传入
+ * RestTemplate有两组方法发送 Get 请求
+ * <code>
+ * restTemplate.getForObject(String url, Class responseType, Map uriVariables)<br/>
+ * restTemplate.getForEntity(String url, Class responseType, Map uriVariables)<br/>
+ * </code>
+ * restTemplate.getForObject是对restTemplate.getForEntity的简化，<br/>
+ * 通过restTemplate.getForEntity，我们可以获取HttpStatus的相关信息并加以使用.<br/>
+ * 如果我们不关心 HttpStatus，那么使用 restTemplate.getForObject() 即可.
+ */
+@Test
+public void getMethodTest() {
+    // http://ip:port/project-name/accounts/filter
+    String url = "http://192.168.1.121:9001/rest-server/accounts/filter?name={name}&age={age}";
+    RestTemplate restTemplate = new RestTemplate();
+    Map<String, Object> params = new HashMap<>();
+    params.put("age", "26");
+    params.put("name", "lee");
+    Account account = restTemplate.getForObject(url, Account.class, params);
+    System.out.println(account);
+    // 上面 2 行等价于下面 5 行
+    /*ResponseEntity<Account> responseEntity = restTemplate.getForEntity(url, Account.class, params);
+    if (responseEntity.getStatusCode().is2xxSuccessful()) {
+        Account account1 = responseEntity.getBody();
+        System.out.println(account1);
+    }*/
+}
+
+RestAPI - 通过@PathVariable提取url变量的GET接口
+
+@RequestMapping(value = "accounts/{id}", method = RequestMethod.GET)
+public Account get(@PathVariable("id") Long id, @RequestParam String name) {
+    return new Account(id, name, 18, "!@#$%^&*");
+}
+
+
+@Test
+public void getMethodTest2() {
+    String url = "http://192.168.1.121:9001/rest-server/accounts/{id}?name={name}";
+    RestTemplate restTemplate = new RestTemplate();
+    Map<String, Object> params = new HashMap<>();
+    params.put("id", "100001");
+    params.put("name", "libai");
+    Account account = restTemplate.getForObject(url, Account.class, params);
+    Assert.assertEquals(account.toString(), "Account{id=100001, age=18, name='libai', pwd='!@#$%^&*'}");
+}
+
+使用 RestTemplate 发送 POST 请求
+RestAPI - 使用@RequestBody接收请求参数的POST接口
+
+@RequestMapping(value = "accounts", method = RequestMethod.POST)
+public Account create(@RequestBody Account account) {
+    return account;
+}
+
+
+/**
+ * 使用 RestTemplate 发送 POST 请求<br/>
+ * 请求接口：{@link RestServer#create(Account)}<br/>
+ * <br/>
+ * 根据接口{@link RestServer#create(Account)}的要求，我们需要使用Payload提交方式来提交数据<br/>
+ * Payload提交方式区别于Form提交方式<br/>
+ * Form提交方式提交的数据，服务端可以通过{@link HttpServletRequest#getParameter(String)}方法获取，<br/>
+ * 体现在SpringMVC框架中，即数据参数通过 {@link org.springframework.web.bind.annotation.RequestParam} 注解绑定获取<br/>
+ * Payload提交方式提交的数据，服务端可以通过{@link HttpServletRequest#getInputStream()}方法获取，<br/>
+ * 体现在SpringMVC框架中，即数据参数通过 {@link org.springframework.web.bind.annotation.RequestBody} 注解绑定获取<br/>
+ * <br/>
+ * RestTemplate 默认使用 Payload 方式提交数据，数据的格式是 json。<br/>
+ * 即本示例中 <code>params</code> 会被格式化成 json 格式数据，并放在request body中发送给服务端
+ */
+@Test
+public void postMethodTest() {
+    String url = "http://192.168.1.121:9001/rest-server/accounts";
+    RestTemplate restTemplate = new RestTemplate();
+    Map<String, Object> params = new HashMap<>();
+    params.put("id", "100001");
+    params.put("name", "李白");
+    params.put("age", "100001");
+    params.put("pwd", "&*()#$%^");
+    Account account = restTemplate.postForObject(url, params, Account.class);
+    System.out.println(account);
+}
+
+RestAPI - 使用@RequestParam接收请求参数的POST接口
+
+@RequestMapping(value = "accounts/create", method = RequestMethod.POST)
+public Account create(@RequestParam Long id,
+                        @RequestParam String name,
+                      @RequestParam Integer age,
+                      @RequestParam String pwd) {
+    return new Account(id, name, age, pwd);
+}
+
+/**
+ * 使用 RestTemplate 发送 POST 请求<br/>
+ * 请求接口：{@link RestServer#create(Long, String, Integer, String)}<br/>
+ * <br/>
+ * 根据接口 {@link RestServer#create(Long, String, Integer, String)}的要求，我们需要使用Form提交方式来提交数据<br/>
+ * RestTemplate 默认使用 Payload 方式提交数据，想要使用Form方式提交，需要通过 HttpHeaders 设置<br/>
+ * 另外，多个参数需要使用{@link LinkedMultiValueMap}来封装
+ */
+@Test
+public void postMethodTest2() {
+    String url = "http://192.168.1.121:9001/rest-server/accounts/create";
+    RestTemplate restTemplate = new RestTemplate();
+    // 此处不能换成 HashMap
+    MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+    params.add("id", "100001");
+    params.add("name", "杜甫");
+    params.add("age", "100001");
+    params.add("pwd", "&*()#$%^");
+    // 通过 HttpHeaders 设置Form方式提交
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(params, headers);
+    Account account = restTemplate.postForObject(url, httpEntity, Account.class);
+    System.out.println(account);
+}
+
+使用 RestTemplate 发送带有 HttpHeader 信息的请求
+RestAPI - 使用@RequestHeader获取请求头信息的POST接口
+
+@RequestMapping(value = "accounts/authorization", method = RequestMethod.POST)
+public Account create(@RequestHeader("authorization") String authorization,
+                      @RequestHeader("token") String token,
+                      @RequestBody Account account) {
+    if (authorization.equals("12345678") && token.equals("bce235emn97jjf00")) {
+        return account;
+    }
+    return new Account();
+}
+
+RestTemplate Demo
+
+@Test
+public void httpHeaderTest() {
+    String url = "http://192.168.1.121:9001/rest-server/accounts/authorization";
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("authorization", "12345678");
+    headers.add("token", "bce235emn97jjf00");
+
+    Map<String, Object> params = new HashMap<>();
+    params.put("id", "100001");
+    params.put("name", "李白");
+    params.put("age", "100001");
+    params.put("pwd", "&*()#$%^");
+
+    HttpEntity<Map<String, Object>> httpEntity = new HttpEntity<>(params, headers);
+    RestTemplate restTemplate = new RestTemplate();
+    Account account = restTemplate.postForObject(url, httpEntity, Account.class);
+    System.out.println(account.toString());
+}
+使用 RestTemplate 进行文件上传
+使用@RequestPart接收文件上传请求的POST接口
+
+@RequestMapping(value = "accounts/logo", method = RequestMethod.POST)
+public boolean changeLogo(@RequestPart("logo") MultipartFile file, 
+    @RequestParam(value = "nickname", required = false) String nickname) throws IOException {
+    String fileName = file.getOriginalFilename();
+    File f = new File(fileName);
+    file.transferTo(f);
+    System.out.println(f.getAbsolutePath());
+    return true;
+}
+
+
+@Test
+public void uploadImgTest() {
+    String url = "http://192.168.1.121:9001/rest-server/accounts/logo";
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+    MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+    params.add("logo", new FileSystemResource("C:\\Users\\lixiangke\\Pictures\\Saved Pictures\\jdsadh.jpg"));
+    params.add("nickname", "nick");
+
+    HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(params, headers);
+    RestTemplate restTemplate = new RestTemplate();
+    String str = restTemplate.postForObject(url, httpEntity, String.class);
+    System.out.println(str);
+}
+
+
+
+public class Account {
+    private Long id;
+    private int age;
+    private String name;
+    private String pwd;
+
+    public Account() {
+    }
+
+    public Account(Long id, String name, int age, String pwd) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.pwd = pwd;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", age=" + age +
+                ", name='" + name + '\'' +
+                ", pwd='" + pwd + '\'' +
+                '}';
+    }
+}
