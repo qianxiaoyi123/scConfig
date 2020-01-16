@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="multipledatasources.mapper.BtrnbChktstDmdDtMapper" >
+  <resultMap id="BaseResultMap" type="multipledatasources.bean.BtrnbChktstDmdDt" >
+    <id column="BTRNB_CHKTST_DMD_DT_NO" property="btrnbChktstDmdDtNo" jdbcType="VARCHAR" />
+    <result column="BTRNB_CHKTST_REC_BL_NO" property="btrnbChktstRecBlNo" jdbcType="VARCHAR" />
+    <result column="BTRNB_CHKTST_AFORM_TIME" property="btrnbChktstAformTime" jdbcType="TIMESTAMP" />
+    <result column="CHKTST_DMDCD" property="chktstDmdcd" jdbcType="VARCHAR" />
+    <result column="CHKTST_DMD_NM" property="chktstDmdNm" jdbcType="VARCHAR" />
+    <result column="CHKTST_DMD_FLAG" property="chktstDmdFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BTRNB_CHKTST_DMD_DT_NO, BTRNB_CHKTST_REC_BL_NO, BTRNB_CHKTST_AFORM_TIME, CHKTST_DMDCD, 
+    CHKTST_DMD_NM, CHKTST_DMD_FLAG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from BTRNB_CHKTST_DMD_DT
+    where BTRNB_CHKTST_DMD_DT_NO = #{btrnbChktstDmdDtNo,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from BTRNB_CHKTST_DMD_DT
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BTRNB_CHKTST_DMD_DT
+    where BTRNB_CHKTST_DMD_DT_NO = #{btrnbChktstDmdDtNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="multipledatasources.bean.BtrnbChktstDmdDt" >
+    insert into BTRNB_CHKTST_DMD_DT (BTRNB_CHKTST_DMD_DT_NO, BTRNB_CHKTST_REC_BL_NO, 
+      BTRNB_CHKTST_AFORM_TIME, CHKTST_DMDCD, CHKTST_DMD_NM, 
+      CHKTST_DMD_FLAG)
+    values (#{btrnbChktstDmdDtNo,jdbcType=VARCHAR}, #{btrnbChktstRecBlNo,jdbcType=VARCHAR}, 
+      #{btrnbChktstAformTime,jdbcType=TIMESTAMP}, #{chktstDmdcd,jdbcType=VARCHAR}, #{chktstDmdNm,jdbcType=VARCHAR}, 
+      #{chktstDmdFlag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="multipledatasources.bean.BtrnbChktstDmdDt" >
+    insert into BTRNB_CHKTST_DMD_DT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="btrnbChktstDmdDtNo != null" >
+        BTRNB_CHKTST_DMD_DT_NO,
+      </if>
+      <if test="btrnbChktstRecBlNo != null" >
+        BTRNB_CHKTST_REC_BL_NO,
+      </if>
+      <if test="btrnbChktstAformTime != null" >
+        BTRNB_CHKTST_AFORM_TIME,
+      </if>
+      <if test="chktstDmdcd != null" >
+        CHKTST_DMDCD,
+      </if>
+      <if test="chktstDmdNm != null" >
+        CHKTST_DMD_NM,
+      </if>
+      <if test="chktstDmdFlag != null" >
+        CHKTST_DMD_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="btrnbChktstDmdDtNo != null" >
+        #{btrnbChktstDmdDtNo,jdbcType=VARCHAR},
+      </if>
+      <if test="btrnbChktstRecBlNo != null" >
+        #{btrnbChktstRecBlNo,jdbcType=VARCHAR},
+      </if>
+      <if test="btrnbChktstAformTime != null" >
+        #{btrnbChktstAformTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chktstDmdcd != null" >
+        #{chktstDmdcd,jdbcType=VARCHAR},
+      </if>
+      <if test="chktstDmdNm != null" >
+        #{chktstDmdNm,jdbcType=VARCHAR},
+      </if>
+      <if test="chktstDmdFlag != null" >
+        #{chktstDmdFlag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="multipledatasources.bean.BtrnbChktstDmdDt" >
+    update BTRNB_CHKTST_DMD_DT
+    <set >
+      <if test="btrnbChktstRecBlNo != null" >
+        BTRNB_CHKTST_REC_BL_NO = #{btrnbChktstRecBlNo,jdbcType=VARCHAR},
+      </if>
+      <if test="btrnbChktstAformTime != null" >
+        BTRNB_CHKTST_AFORM_TIME = #{btrnbChktstAformTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chktstDmdcd != null" >
+        CHKTST_DMDCD = #{chktstDmdcd,jdbcType=VARCHAR},
+      </if>
+      <if test="chktstDmdNm != null" >
+        CHKTST_DMD_NM = #{chktstDmdNm,jdbcType=VARCHAR},
+      </if>
+      <if test="chktstDmdFlag != null" >
+        CHKTST_DMD_FLAG = #{chktstDmdFlag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BTRNB_CHKTST_DMD_DT_NO = #{btrnbChktstDmdDtNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="multipledatasources.bean.BtrnbChktstDmdDt" >
+    update BTRNB_CHKTST_DMD_DT
+    set BTRNB_CHKTST_REC_BL_NO = #{btrnbChktstRecBlNo,jdbcType=VARCHAR},
+      BTRNB_CHKTST_AFORM_TIME = #{btrnbChktstAformTime,jdbcType=TIMESTAMP},
+      CHKTST_DMDCD = #{chktstDmdcd,jdbcType=VARCHAR},
+      CHKTST_DMD_NM = #{chktstDmdNm,jdbcType=VARCHAR},
+      CHKTST_DMD_FLAG = #{chktstDmdFlag,jdbcType=VARCHAR}
+    where BTRNB_CHKTST_DMD_DT_NO = #{btrnbChktstDmdDtNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="generatorTables" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--
+        生成一对一配置
+        <plugin type="cc.bandaotixi.plugins.OneToOnePlugin"></plugin>
+        生成一对多配置
+        <plugin type="cc.bandaotixi.plugins.OneToManyPlugin"></plugin>
+
+        <plugin type="cc.bandaotixi.plugins.BatchInsertPlugin"></plugin>
+        <plugin type="cc.bandaotixi.plugins.BatchUpdatePlugin"></plugin>
+        -->
+        <!-- <plugin type="org.mybatis.generator.plugins.MapperConfigPlugin">
+            <property name="fileName" value="mybatis-config.xml" />
+            <property name="targetPackage" value="/" />
+            <property name="targetProject" value="src/main/resources" />
+        </plugin> -->
+
+        <!-- 此处是将 Example 改名为 Criteria 想改成什么都行 -->
+        <!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example" />
+            <property name="replaceString" value="Criteria" />
+        </plugin> -->
+
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!-- commentGenerator 去除自动生成的注释 -->
+        <!-- <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true" />
+        </commentGenerator> -->
+        <commentGenerator type="multipledatasources.common.MyCommentGenerator">
+        </commentGenerator>
+
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@10.99.27.46:1521:ora12c"
+                        userId="C##BT_SUP"
+                        password="C##BT_SUP">
+            <property name="remarksReporting" value="true"></property>
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true， 把 JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- javaModelGenerator是模型的生成信息，这里将指定这些Java model类的生成路径； -->
+        <javaModelGenerator targetPackage="multipledatasources.bean" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- sqlMapGenerator是mybatis 的sqlMapper XML文件的生成信息，包括生成路径等； 先生成xml，在生成java -->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- javaClientGenerator是应用接口的生成信息； -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="multipledatasources.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- table是用户指定的被生成相关信息的表，它必须在指定的jdbc连接中已经被建立。?是否可以多个 -->
+        <!--<table  tableName="BTRNB_SHOPS_PUTREC_BSC" domainObjectName="BtrnbShopsPutrecBsc" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
+       <table tableName="BTRNB_PRSN_PUTREC_BSC" domainObjectName="BtrnbPrsnPutrecBsc"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/>
+ 		<!--<table tableName="OTRDCL_EMVRY_LOG" domainObjectName="OtrdclEmvryLog"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+
+
+    </context>
+</generatorConfiguration> 
+

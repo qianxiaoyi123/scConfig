@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="multipledatasources.mapper.TransactionMapping1">
+	<insert id="save" parameterType="multipledatasources.bean.TestBean">
+		insert into cs_test
+		values(#{id},
+		#{userid},#{score},#{classid})
+	</insert>
+	<select id="select" resultType="java.util.HashMap">
+		select * from BTRNB_SHOPS_PUTREC_BSC where BTRNB_SHOPS_PUTREC_BSC_NO='aa5c47e3-8a4f-41f8-b685-931e1ed38666'
+	</select>
+	<select id="select3" resultType="java.util.HashMap">
+		select * from  SEND_MSG_CHK105_BAK where id='6f681dae25c74242aa714cd0bcc38679'
+	</select>
+</mapper>

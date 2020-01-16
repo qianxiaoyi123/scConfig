@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="multipledatasources.mapper.BtrnbPrsnPutrecBscMapper" >
+  <resultMap id="BaseResultMap" type="multipledatasources.bean.BtrnbPrsnPutrecBsc" >
+    <id column="BTRNB_PRSN_PUTREC_BSC_NO" property="btrnbPrsnPutrecBscNo" jdbcType="VARCHAR" />
+    <result column="BTRNB_PRSN_PUTREC_NO" property="btrnbPrsnPutrecNo" jdbcType="VARCHAR" />
+    <result column="DCL_TIME" property="dclTime" jdbcType="TIMESTAMP" />
+    <result column="PUTREC_ER_NAME" property="putrecErName" jdbcType="VARCHAR" />
+    <result column="GENCD" property="gencd" jdbcType="VARCHAR" />
+    <result column="IDNO" property="idno" jdbcType="VARCHAR" />
+    <result column="IDNO_HASH_NO" property="idnoHashNo" jdbcType="VARCHAR" />
+    <result column="IDCD_VALID_BEGIN_DATE" property="idcdValidBeginDate" jdbcType="TIMESTAMP" />
+    <result column="IDCD_VALID_FINISH_DATE" property="idcdValidFinishDate" jdbcType="TIMESTAMP" />
+    <result column="IDCD_GCERT_PGOFF_NM" property="idcdGcertPgoffNm" jdbcType="VARCHAR" />
+    <result column="MOBNUM" property="mobnum" jdbcType="DECIMAL" />
+    <result column="BIRPL_NM" property="birplNm" jdbcType="VARCHAR" />
+    <result column="RESID_ADDR" property="residAddr" jdbcType="VARCHAR" />
+    <result column="IDENT_TYPECD" property="identTypecd" jdbcType="VARCHAR" />
+    <result column="DCL_CUSCD" property="dclCuscd" jdbcType="VARCHAR" />
+    <result column="SUPV_LOCT_NO" property="supvLoctNo" jdbcType="VARCHAR" />
+    <result column="IC_CARDNO" property="icCardno" jdbcType="VARCHAR" />
+    <result column="IC_CARD_MADE_NO" property="icCardMadeNo" jdbcType="VARCHAR" />
+    <result column="PUTREC_PSTP_FLAG" property="putrecPstpFlag" jdbcType="VARCHAR" />
+    <result column="PUTREC_TIME" property="putrecTime" jdbcType="TIMESTAMP" />
+    <result column="PUTREC_VALID_DATE" property="putrecValidDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_ER_NO" property="createErNo" jdbcType="VARCHAR" />
+    <result column="CREATE_ER_NAME" property="createErName" jdbcType="VARCHAR" />
+    <result column="MODF_TIME" property="modfTime" jdbcType="TIMESTAMP" />
+    <result column="MODF_ER_NO" property="modfErNo" jdbcType="VARCHAR" />
+    <result column="MODF_ER_NAME" property="modfErName" jdbcType="VARCHAR" />
+    <result column="EMVRY_STUCD" property="emvryStucd" jdbcType="VARCHAR" />
+    <result column="EMVRY_OPIN_DESC" property="emvryOpinDesc" jdbcType="VARCHAR" />
+    <result column="RMK" property="rmk" jdbcType="VARCHAR" />
+    <result column="VALID_FLAG" property="validFlag" jdbcType="VARCHAR" />
+    <result column="OP_TYPECD" property="opTypecd" jdbcType="VARCHAR" />
+    <result column="PUTREC_CHG_FLAG" property="putrecChgFlag" jdbcType="VARCHAR" />
+    <result column="NATIONALITY" property="nationality" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="multipledatasources.bean.BtrnbPrsnPutrecBscWithBLOBs" extends="BaseResultMap" >
+    <result column="FST_FGPRT_INFO" property="fstFgprtInfo" jdbcType="CLOB" />
+    <result column="SECD_FGPRT_INFO" property="secdFgprtInfo" jdbcType="CLOB" />
+    <result column="PHOTO_INFO" property="photoInfo" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BTRNB_PRSN_PUTREC_BSC_NO, BTRNB_PRSN_PUTREC_NO, DCL_TIME, PUTREC_ER_NAME, GENCD, 
+    IDNO, IDNO_HASH_NO, IDCD_VALID_BEGIN_DATE, IDCD_VALID_FINISH_DATE, IDCD_GCERT_PGOFF_NM, 
+    MOBNUM, BIRPL_NM, RESID_ADDR, IDENT_TYPECD, DCL_CUSCD, SUPV_LOCT_NO, IC_CARDNO, IC_CARD_MADE_NO, 
+    PUTREC_PSTP_FLAG, PUTREC_TIME, PUTREC_VALID_DATE, CREATE_TIME, CREATE_ER_NO, CREATE_ER_NAME, 
+    MODF_TIME, MODF_ER_NO, MODF_ER_NAME, EMVRY_STUCD, EMVRY_OPIN_DESC, RMK, VALID_FLAG, 
+    OP_TYPECD, PUTREC_CHG_FLAG, NATIONALITY
+  </sql>
+  <sql id="Blob_Column_List" >
+    FST_FGPRT_INFO, SECD_FGPRT_INFO, PHOTO_INFO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BTRNB_PRSN_PUTREC_BSC
+    where BTRNB_PRSN_PUTREC_BSC_NO = #{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BTRNB_PRSN_PUTREC_BSC
+    where BTRNB_PRSN_PUTREC_BSC_NO = #{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="multipledatasources.bean.BtrnbPrsnPutrecBscWithBLOBs" >
+    insert into BTRNB_PRSN_PUTREC_BSC (BTRNB_PRSN_PUTREC_BSC_NO, BTRNB_PRSN_PUTREC_NO, 
+      DCL_TIME, PUTREC_ER_NAME, GENCD, 
+      IDNO, IDNO_HASH_NO, IDCD_VALID_BEGIN_DATE, 
+      IDCD_VALID_FINISH_DATE, IDCD_GCERT_PGOFF_NM, 
+      MOBNUM, BIRPL_NM, RESID_ADDR, 
+      IDENT_TYPECD, DCL_CUSCD, SUPV_LOCT_NO, 
+      IC_CARDNO, IC_CARD_MADE_NO, PUTREC_PSTP_FLAG, 
+      PUTREC_TIME, PUTREC_VALID_DATE, CREATE_TIME, 
+      CREATE_ER_NO, CREATE_ER_NAME, MODF_TIME, 
+      MODF_ER_NO, MODF_ER_NAME, EMVRY_STUCD, 
+      EMVRY_OPIN_DESC, RMK, VALID_FLAG, 
+      OP_TYPECD, PUTREC_CHG_FLAG, NATIONALITY, 
+      FST_FGPRT_INFO, SECD_FGPRT_INFO, PHOTO_INFO
+      )
+    values (#{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR}, #{btrnbPrsnPutrecNo,jdbcType=VARCHAR}, 
+      #{dclTime,jdbcType=TIMESTAMP}, #{putrecErName,jdbcType=VARCHAR}, #{gencd,jdbcType=VARCHAR}, 
+      #{idno,jdbcType=VARCHAR}, #{idnoHashNo,jdbcType=VARCHAR}, #{idcdValidBeginDate,jdbcType=TIMESTAMP}, 
+      #{idcdValidFinishDate,jdbcType=TIMESTAMP}, #{idcdGcertPgoffNm,jdbcType=VARCHAR}, 
+      #{mobnum,jdbcType=DECIMAL}, #{birplNm,jdbcType=VARCHAR}, #{residAddr,jdbcType=VARCHAR}, 
+      #{identTypecd,jdbcType=VARCHAR}, #{dclCuscd,jdbcType=VARCHAR}, #{supvLoctNo,jdbcType=VARCHAR}, 
+      #{icCardno,jdbcType=VARCHAR}, #{icCardMadeNo,jdbcType=VARCHAR}, #{putrecPstpFlag,jdbcType=VARCHAR}, 
+      #{putrecTime,jdbcType=TIMESTAMP}, #{putrecValidDate,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createErNo,jdbcType=VARCHAR}, #{createErName,jdbcType=VARCHAR}, #{modfTime,jdbcType=TIMESTAMP}, 
+      #{modfErNo,jdbcType=VARCHAR}, #{modfErName,jdbcType=VARCHAR}, #{emvryStucd,jdbcType=VARCHAR}, 
+      #{emvryOpinDesc,jdbcType=VARCHAR}, #{rmk,jdbcType=VARCHAR}, #{validFlag,jdbcType=VARCHAR}, 
+      #{opTypecd,jdbcType=VARCHAR}, #{putrecChgFlag,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
+      #{fstFgprtInfo,jdbcType=CLOB}, #{secdFgprtInfo,jdbcType=CLOB}, #{photoInfo,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="multipledatasources.bean.BtrnbPrsnPutrecBscWithBLOBs" >
+    insert into BTRNB_PRSN_PUTREC_BSC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="btrnbPrsnPutrecBscNo != null" >
+        BTRNB_PRSN_PUTREC_BSC_NO,
+      </if>
+      <if test="btrnbPrsnPutrecNo != null" >
+        BTRNB_PRSN_PUTREC_NO,
+      </if>
+      <if test="dclTime != null" >
+        DCL_TIME,
+      </if>
+      <if test="putrecErName != null" >
+        PUTREC_ER_NAME,
+      </if>
+      <if test="gencd != null" >
+        GENCD,
+      </if>
+      <if test="idno != null" >
+        IDNO,
+      </if>
+      <if test="idnoHashNo != null" >
+        IDNO_HASH_NO,
+      </if>
+      <if test="idcdValidBeginDate != null" >
+        IDCD_VALID_BEGIN_DATE,
+      </if>
+      <if test="idcdValidFinishDate != null" >
+        IDCD_VALID_FINISH_DATE,
+      </if>
+      <if test="idcdGcertPgoffNm != null" >
+        IDCD_GCERT_PGOFF_NM,
+      </if>
+      <if test="mobnum != null" >
+        MOBNUM,
+      </if>
+      <if test="birplNm != null" >
+        BIRPL_NM,
+      </if>
+      <if test="residAddr != null" >
+        RESID_ADDR,
+      </if>
+      <if test="identTypecd != null" >
+        IDENT_TYPECD,
+      </if>
+      <if test="dclCuscd != null" >
+        DCL_CUSCD,
+      </if>
+      <if test="supvLoctNo != null" >
+        SUPV_LOCT_NO,
+      </if>
+      <if test="icCardno != null" >
+        IC_CARDNO,
+      </if>
+      <if test="icCardMadeNo != null" >
+        IC_CARD_MADE_NO,
+      </if>
+      <if test="putrecPstpFlag != null" >
+        PUTREC_PSTP_FLAG,
+      </if>
+      <if test="putrecTime != null" >
+        PUTREC_TIME,
+      </if>
+      <if test="putrecValidDate != null" >
+        PUTREC_VALID_DATE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createErNo != null" >
+        CREATE_ER_NO,
+      </if>
+      <if test="createErName != null" >
+        CREATE_ER_NAME,
+      </if>
+      <if test="modfTime != null" >
+        MODF_TIME,
+      </if>
+      <if test="modfErNo != null" >
+        MODF_ER_NO,
+      </if>
+      <if test="modfErName != null" >
+        MODF_ER_NAME,
+      </if>
+      <if test="emvryStucd != null" >
+        EMVRY_STUCD,
+      </if>
+      <if test="emvryOpinDesc != null" >
+        EMVRY_OPIN_DESC,
+      </if>
+      <if test="rmk != null" >
+        RMK,
+      </if>
+      <if test="validFlag != null" >
+        VALID_FLAG,
+      </if>
+      <if test="opTypecd != null" >
+        OP_TYPECD,
+      </if>
+      <if test="putrecChgFlag != null" >
+        PUTREC_CHG_FLAG,
+      </if>
+      <if test="nationality != null" >
+        NATIONALITY,
+      </if>
+      <if test="fstFgprtInfo != null" >
+        FST_FGPRT_INFO,
+      </if>
+      <if test="secdFgprtInfo != null" >
+        SECD_FGPRT_INFO,
+      </if>
+      <if test="photoInfo != null" >
+        PHOTO_INFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="btrnbPrsnPutrecBscNo != null" >
+        #{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR},
+      </if>
+      <if test="btrnbPrsnPutrecNo != null" >
+        #{btrnbPrsnPutrecNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dclTime != null" >
+        #{dclTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putrecErName != null" >
+        #{putrecErName,jdbcType=VARCHAR},
+      </if>
+      <if test="gencd != null" >
+        #{gencd,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null" >
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="idnoHashNo != null" >
+        #{idnoHashNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcdValidBeginDate != null" >
+        #{idcdValidBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcdValidFinishDate != null" >
+        #{idcdValidFinishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcdGcertPgoffNm != null" >
+        #{idcdGcertPgoffNm,jdbcType=VARCHAR},
+      </if>
+      <if test="mobnum != null" >
+        #{mobnum,jdbcType=DECIMAL},
+      </if>
+      <if test="birplNm != null" >
+        #{birplNm,jdbcType=VARCHAR},
+      </if>
+      <if test="residAddr != null" >
+        #{residAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="identTypecd != null" >
+        #{identTypecd,jdbcType=VARCHAR},
+      </if>
+      <if test="dclCuscd != null" >
+        #{dclCuscd,jdbcType=VARCHAR},
+      </if>
+      <if test="supvLoctNo != null" >
+        #{supvLoctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="icCardno != null" >
+        #{icCardno,jdbcType=VARCHAR},
+      </if>
+      <if test="icCardMadeNo != null" >
+        #{icCardMadeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecPstpFlag != null" >
+        #{putrecPstpFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecTime != null" >
+        #{putrecTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putrecValidDate != null" >
+        #{putrecValidDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createErNo != null" >
+        #{createErNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createErName != null" >
+        #{createErName,jdbcType=VARCHAR},
+      </if>
+      <if test="modfTime != null" >
+        #{modfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modfErNo != null" >
+        #{modfErNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modfErName != null" >
+        #{modfErName,jdbcType=VARCHAR},
+      </if>
+      <if test="emvryStucd != null" >
+        #{emvryStucd,jdbcType=VARCHAR},
+      </if>
+      <if test="emvryOpinDesc != null" >
+        #{emvryOpinDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="rmk != null" >
+        #{rmk,jdbcType=VARCHAR},
+      </if>
+      <if test="validFlag != null" >
+        #{validFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="opTypecd != null" >
+        #{opTypecd,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecChgFlag != null" >
+        #{putrecChgFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="fstFgprtInfo != null" >
+        #{fstFgprtInfo,jdbcType=CLOB},
+      </if>
+      <if test="secdFgprtInfo != null" >
+        #{secdFgprtInfo,jdbcType=CLOB},
+      </if>
+      <if test="photoInfo != null" >
+        #{photoInfo,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="insertSelectiveallinsert" parameterType="java.util.List" >
+    insert into BTRNB_PRSN_PUTREC_BSC (BTRNB_PRSN_PUTREC_BSC_NO, BTRNB_PRSN_PUTREC_NO,
+    DCL_TIME, PUTREC_ER_NAME, GENCD,
+    IDNO, IDNO_HASH_NO, IDCD_VALID_BEGIN_DATE,
+    IDCD_VALID_FINISH_DATE, IDCD_GCERT_PGOFF_NM,
+    MOBNUM, BIRPL_NM, RESID_ADDR,
+    IDENT_TYPECD, DCL_CUSCD, SUPV_LOCT_NO,
+    IC_CARDNO, IC_CARD_MADE_NO, PUTREC_PSTP_FLAG,
+    PUTREC_TIME, PUTREC_VALID_DATE, CREATE_TIME,
+    CREATE_ER_NO, CREATE_ER_NAME, MODF_TIME,
+    MODF_ER_NO, MODF_ER_NAME, EMVRY_STUCD,
+    EMVRY_OPIN_DESC, RMK, VALID_FLAG,
+    OP_TYPECD, PUTREC_CHG_FLAG, NATIONALITY,
+    FST_FGPRT_INFO, SECD_FGPRT_INFO, PHOTO_INFO
+    )(
+    <foreach collection="list" item="item" index="index" separator="union all">
+       select
+      #{item.btrnbPrsnPutrecBscNo,jdbcType=VARCHAR}, #{item.btrnbPrsnPutrecNo,jdbcType=VARCHAR},
+      #{item.dclTime,jdbcType=TIMESTAMP}, #{item.putrecErName,jdbcType=VARCHAR}, #{item.gencd,jdbcType=VARCHAR},
+      #{item.idno,jdbcType=VARCHAR}, #{item.idnoHashNo,jdbcType=VARCHAR}, #{item.idcdValidBeginDate,jdbcType=TIMESTAMP},
+      #{item.idcdValidFinishDate,jdbcType=TIMESTAMP}, #{item.idcdGcertPgoffNm,jdbcType=VARCHAR},
+      #{item.mobnum,jdbcType=DECIMAL}, #{item.birplNm,jdbcType=VARCHAR}, #{item.residAddr,jdbcType=VARCHAR},
+      #{item.identTypecd,jdbcType=VARCHAR}, #{item.dclCuscd,jdbcType=VARCHAR}, #{item.supvLoctNo,jdbcType=VARCHAR},
+      #{item.icCardno,jdbcType=VARCHAR}, #{item.icCardMadeNo,jdbcType=VARCHAR}, #{item.putrecPstpFlag,jdbcType=VARCHAR},
+      #{item.putrecTime,jdbcType=TIMESTAMP}, #{item.putrecValidDate,jdbcType=TIMESTAMP},
+      #{item.createTime,jdbcType=TIMESTAMP},
+      #{item.createErNo,jdbcType=VARCHAR}, #{item.createErName,jdbcType=VARCHAR}, #{item.modfTime,jdbcType=TIMESTAMP},
+      #{item.modfErNo,jdbcType=VARCHAR}, #{item.modfErName,jdbcType=VARCHAR}, #{item.emvryStucd,jdbcType=VARCHAR},
+      #{item.emvryOpinDesc,jdbcType=VARCHAR}, #{item.rmk,jdbcType=VARCHAR}, #{item.validFlag,jdbcType=VARCHAR},
+      #{item.opTypecd,jdbcType=VARCHAR}, #{item.putrecChgFlag,jdbcType=VARCHAR}, #{item.nationality,jdbcType=VARCHAR},
+      #{item.fstFgprtInfo,jdbcType=CLOB}, #{item.secdFgprtInfo,jdbcType=CLOB}, #{item.photoInfo,jdbcType=CLOB}
+      from dual
+    </foreach>
+    )
+   <!-- <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="btrnbPrsnPutrecBscNo != null" >
+        BTRNB_PRSN_PUTREC_BSC_NO,
+      </if>
+      <if test="btrnbPrsnPutrecNo != null" >
+        BTRNB_PRSN_PUTREC_NO,
+      </if>
+      <if test="dclTime != null" >
+        DCL_TIME,
+      </if>
+      <if test="putrecErName != null" >
+        PUTREC_ER_NAME,
+      </if>
+      <if test="gencd != null" >
+        GENCD,
+      </if>
+      <if test="idno != null" >
+        IDNO,
+      </if>
+      <if test="idnoHashNo != null" >
+        IDNO_HASH_NO,
+      </if>
+      <if test="idcdValidBeginDate != null" >
+        IDCD_VALID_BEGIN_DATE,
+      </if>
+      <if test="idcdValidFinishDate != null" >
+        IDCD_VALID_FINISH_DATE,
+      </if>
+      <if test="idcdGcertPgoffNm != null" >
+        IDCD_GCERT_PGOFF_NM,
+      </if>
+      <if test="mobnum != null" >
+        MOBNUM,
+      </if>
+      <if test="birplNm != null" >
+        BIRPL_NM,
+      </if>
+      <if test="residAddr != null" >
+        RESID_ADDR,
+      </if>
+      <if test="identTypecd != null" >
+        IDENT_TYPECD,
+      </if>
+      <if test="dclCuscd != null" >
+        DCL_CUSCD,
+      </if>
+      <if test="supvLoctNo != null" >
+        SUPV_LOCT_NO,
+      </if>
+      <if test="icCardno != null" >
+        IC_CARDNO,
+      </if>
+      <if test="icCardMadeNo != null" >
+        IC_CARD_MADE_NO,
+      </if>
+      <if test="putrecPstpFlag != null" >
+        PUTREC_PSTP_FLAG,
+      </if>
+      <if test="putrecTime != null" >
+        PUTREC_TIME,
+      </if>
+      <if test="putrecValidDate != null" >
+        PUTREC_VALID_DATE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createErNo != null" >
+        CREATE_ER_NO,
+      </if>
+      <if test="createErName != null" >
+        CREATE_ER_NAME,
+      </if>
+      <if test="modfTime != null" >
+        MODF_TIME,
+      </if>
+      <if test="modfErNo != null" >
+        MODF_ER_NO,
+      </if>
+      <if test="modfErName != null" >
+        MODF_ER_NAME,
+      </if>
+      <if test="emvryStucd != null" >
+        EMVRY_STUCD,
+      </if>
+      <if test="emvryOpinDesc != null" >
+        EMVRY_OPIN_DESC,
+      </if>
+      <if test="rmk != null" >
+        RMK,
+      </if>
+      <if test="validFlag != null" >
+        VALID_FLAG,
+      </if>
+      <if test="opTypecd != null" >
+        OP_TYPECD,
+      </if>
+      <if test="putrecChgFlag != null" >
+        PUTREC_CHG_FLAG,
+      </if>
+      <if test="nationality != null" >
+        NATIONALITY,
+      </if>
+      <if test="fstFgprtInfo != null" >
+        FST_FGPRT_INFO,
+      </if>
+      <if test="secdFgprtInfo != null" >
+        SECD_FGPRT_INFO,
+      </if>
+      <if test="photoInfo != null" >
+        PHOTO_INFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="btrnbPrsnPutrecBscNo != null" >
+        #{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR},
+      </if>
+      <if test="btrnbPrsnPutrecNo != null" >
+        #{btrnbPrsnPutrecNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dclTime != null" >
+        #{dclTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putrecErName != null" >
+        #{putrecErName,jdbcType=VARCHAR},
+      </if>
+      <if test="gencd != null" >
+        #{gencd,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null" >
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="idnoHashNo != null" >
+        #{idnoHashNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcdValidBeginDate != null" >
+        #{idcdValidBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcdValidFinishDate != null" >
+        #{idcdValidFinishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcdGcertPgoffNm != null" >
+        #{idcdGcertPgoffNm,jdbcType=VARCHAR},
+      </if>
+      <if test="mobnum != null" >
+        #{mobnum,jdbcType=DECIMAL},
+      </if>
+      <if test="birplNm != null" >
+        #{birplNm,jdbcType=VARCHAR},
+      </if>
+      <if test="residAddr != null" >
+        #{residAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="identTypecd != null" >
+        #{identTypecd,jdbcType=VARCHAR},
+      </if>
+      <if test="dclCuscd != null" >
+        #{dclCuscd,jdbcType=VARCHAR},
+      </if>
+      <if test="supvLoctNo != null" >
+        #{supvLoctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="icCardno != null" >
+        #{icCardno,jdbcType=VARCHAR},
+      </if>
+      <if test="icCardMadeNo != null" >
+        #{icCardMadeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecPstpFlag != null" >
+        #{putrecPstpFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecTime != null" >
+        #{putrecTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putrecValidDate != null" >
+        #{putrecValidDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createErNo != null" >
+        #{createErNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createErName != null" >
+        #{createErName,jdbcType=VARCHAR},
+      </if>
+      <if test="modfTime != null" >
+        #{modfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modfErNo != null" >
+        #{modfErNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modfErName != null" >
+        #{modfErName,jdbcType=VARCHAR},
+      </if>
+      <if test="emvryStucd != null" >
+        #{emvryStucd,jdbcType=VARCHAR},
+      </if>
+      <if test="emvryOpinDesc != null" >
+        #{emvryOpinDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="rmk != null" >
+        #{rmk,jdbcType=VARCHAR},
+      </if>
+      <if test="validFlag != null" >
+        #{validFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="opTypecd != null" >
+        #{opTypecd,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecChgFlag != null" >
+        #{putrecChgFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="fstFgprtInfo != null" >
+        #{fstFgprtInfo,jdbcType=CLOB},
+      </if>
+      <if test="secdFgprtInfo != null" >
+        #{secdFgprtInfo,jdbcType=CLOB},
+      </if>
+      <if test="photoInfo != null" >
+        #{photoInfo,jdbcType=CLOB},
+      </if>
+    </trim>  -->
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="multipledatasources.bean.BtrnbPrsnPutrecBscWithBLOBs" >
+    update BTRNB_PRSN_PUTREC_BSC
+    <set >
+      <if test="btrnbPrsnPutrecNo != null" >
+        BTRNB_PRSN_PUTREC_NO = #{btrnbPrsnPutrecNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dclTime != null" >
+        DCL_TIME = #{dclTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putrecErName != null" >
+        PUTREC_ER_NAME = #{putrecErName,jdbcType=VARCHAR},
+      </if>
+      <if test="gencd != null" >
+        GENCD = #{gencd,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null" >
+        IDNO = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="idnoHashNo != null" >
+        IDNO_HASH_NO = #{idnoHashNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcdValidBeginDate != null" >
+        IDCD_VALID_BEGIN_DATE = #{idcdValidBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcdValidFinishDate != null" >
+        IDCD_VALID_FINISH_DATE = #{idcdValidFinishDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcdGcertPgoffNm != null" >
+        IDCD_GCERT_PGOFF_NM = #{idcdGcertPgoffNm,jdbcType=VARCHAR},
+      </if>
+      <if test="mobnum != null" >
+        MOBNUM = #{mobnum,jdbcType=DECIMAL},
+      </if>
+      <if test="birplNm != null" >
+        BIRPL_NM = #{birplNm,jdbcType=VARCHAR},
+      </if>
+      <if test="residAddr != null" >
+        RESID_ADDR = #{residAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="identTypecd != null" >
+        IDENT_TYPECD = #{identTypecd,jdbcType=VARCHAR},
+      </if>
+      <if test="dclCuscd != null" >
+        DCL_CUSCD = #{dclCuscd,jdbcType=VARCHAR},
+      </if>
+      <if test="supvLoctNo != null" >
+        SUPV_LOCT_NO = #{supvLoctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="icCardno != null" >
+        IC_CARDNO = #{icCardno,jdbcType=VARCHAR},
+      </if>
+      <if test="icCardMadeNo != null" >
+        IC_CARD_MADE_NO = #{icCardMadeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecPstpFlag != null" >
+        PUTREC_PSTP_FLAG = #{putrecPstpFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecTime != null" >
+        PUTREC_TIME = #{putrecTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="putrecValidDate != null" >
+        PUTREC_VALID_DATE = #{putrecValidDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createErNo != null" >
+        CREATE_ER_NO = #{createErNo,jdbcType=VARCHAR},
+      </if>
+      <if test="createErName != null" >
+        CREATE_ER_NAME = #{createErName,jdbcType=VARCHAR},
+      </if>
+      <if test="modfTime != null" >
+        MODF_TIME = #{modfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modfErNo != null" >
+        MODF_ER_NO = #{modfErNo,jdbcType=VARCHAR},
+      </if>
+      <if test="modfErName != null" >
+        MODF_ER_NAME = #{modfErName,jdbcType=VARCHAR},
+      </if>
+      <if test="emvryStucd != null" >
+        EMVRY_STUCD = #{emvryStucd,jdbcType=VARCHAR},
+      </if>
+      <if test="emvryOpinDesc != null" >
+        EMVRY_OPIN_DESC = #{emvryOpinDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="rmk != null" >
+        RMK = #{rmk,jdbcType=VARCHAR},
+      </if>
+      <if test="validFlag != null" >
+        VALID_FLAG = #{validFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="opTypecd != null" >
+        OP_TYPECD = #{opTypecd,jdbcType=VARCHAR},
+      </if>
+      <if test="putrecChgFlag != null" >
+        PUTREC_CHG_FLAG = #{putrecChgFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        NATIONALITY = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="fstFgprtInfo != null" >
+        FST_FGPRT_INFO = #{fstFgprtInfo,jdbcType=CLOB},
+      </if>
+      <if test="secdFgprtInfo != null" >
+        SECD_FGPRT_INFO = #{secdFgprtInfo,jdbcType=CLOB},
+      </if>
+      <if test="photoInfo != null" >
+        PHOTO_INFO = #{photoInfo,jdbcType=CLOB},
+      </if>
+    </set>
+    where BTRNB_PRSN_PUTREC_BSC_NO = #{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="multipledatasources.bean.BtrnbPrsnPutrecBscWithBLOBs" >
+    update BTRNB_PRSN_PUTREC_BSC
+    set BTRNB_PRSN_PUTREC_NO = #{btrnbPrsnPutrecNo,jdbcType=VARCHAR},
+      DCL_TIME = #{dclTime,jdbcType=TIMESTAMP},
+      PUTREC_ER_NAME = #{putrecErName,jdbcType=VARCHAR},
+      GENCD = #{gencd,jdbcType=VARCHAR},
+      IDNO = #{idno,jdbcType=VARCHAR},
+      IDNO_HASH_NO = #{idnoHashNo,jdbcType=VARCHAR},
+      IDCD_VALID_BEGIN_DATE = #{idcdValidBeginDate,jdbcType=TIMESTAMP},
+      IDCD_VALID_FINISH_DATE = #{idcdValidFinishDate,jdbcType=TIMESTAMP},
+      IDCD_GCERT_PGOFF_NM = #{idcdGcertPgoffNm,jdbcType=VARCHAR},
+      MOBNUM = #{mobnum,jdbcType=DECIMAL},
+      BIRPL_NM = #{birplNm,jdbcType=VARCHAR},
+      RESID_ADDR = #{residAddr,jdbcType=VARCHAR},
+      IDENT_TYPECD = #{identTypecd,jdbcType=VARCHAR},
+      DCL_CUSCD = #{dclCuscd,jdbcType=VARCHAR},
+      SUPV_LOCT_NO = #{supvLoctNo,jdbcType=VARCHAR},
+      IC_CARDNO = #{icCardno,jdbcType=VARCHAR},
+      IC_CARD_MADE_NO = #{icCardMadeNo,jdbcType=VARCHAR},
+      PUTREC_PSTP_FLAG = #{putrecPstpFlag,jdbcType=VARCHAR},
+      PUTREC_TIME = #{putrecTime,jdbcType=TIMESTAMP},
+      PUTREC_VALID_DATE = #{putrecValidDate,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_ER_NO = #{createErNo,jdbcType=VARCHAR},
+      CREATE_ER_NAME = #{createErName,jdbcType=VARCHAR},
+      MODF_TIME = #{modfTime,jdbcType=TIMESTAMP},
+      MODF_ER_NO = #{modfErNo,jdbcType=VARCHAR},
+      MODF_ER_NAME = #{modfErName,jdbcType=VARCHAR},
+      EMVRY_STUCD = #{emvryStucd,jdbcType=VARCHAR},
+      EMVRY_OPIN_DESC = #{emvryOpinDesc,jdbcType=VARCHAR},
+      RMK = #{rmk,jdbcType=VARCHAR},
+      VALID_FLAG = #{validFlag,jdbcType=VARCHAR},
+      OP_TYPECD = #{opTypecd,jdbcType=VARCHAR},
+      PUTREC_CHG_FLAG = #{putrecChgFlag,jdbcType=VARCHAR},
+      NATIONALITY = #{nationality,jdbcType=VARCHAR},
+      FST_FGPRT_INFO = #{fstFgprtInfo,jdbcType=CLOB},
+      SECD_FGPRT_INFO = #{secdFgprtInfo,jdbcType=CLOB},
+      PHOTO_INFO = #{photoInfo,jdbcType=CLOB}
+    where BTRNB_PRSN_PUTREC_BSC_NO = #{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="multipledatasources.bean.BtrnbPrsnPutrecBsc" >
+    update BTRNB_PRSN_PUTREC_BSC
+    set BTRNB_PRSN_PUTREC_NO = #{btrnbPrsnPutrecNo,jdbcType=VARCHAR},
+      DCL_TIME = #{dclTime,jdbcType=TIMESTAMP},
+      PUTREC_ER_NAME = #{putrecErName,jdbcType=VARCHAR},
+      GENCD = #{gencd,jdbcType=VARCHAR},
+      IDNO = #{idno,jdbcType=VARCHAR},
+      IDNO_HASH_NO = #{idnoHashNo,jdbcType=VARCHAR},
+      IDCD_VALID_BEGIN_DATE = #{idcdValidBeginDate,jdbcType=TIMESTAMP},
+      IDCD_VALID_FINISH_DATE = #{idcdValidFinishDate,jdbcType=TIMESTAMP},
+      IDCD_GCERT_PGOFF_NM = #{idcdGcertPgoffNm,jdbcType=VARCHAR},
+      MOBNUM = #{mobnum,jdbcType=DECIMAL},
+      BIRPL_NM = #{birplNm,jdbcType=VARCHAR},
+      RESID_ADDR = #{residAddr,jdbcType=VARCHAR},
+      IDENT_TYPECD = #{identTypecd,jdbcType=VARCHAR},
+      DCL_CUSCD = #{dclCuscd,jdbcType=VARCHAR},
+      SUPV_LOCT_NO = #{supvLoctNo,jdbcType=VARCHAR},
+      IC_CARDNO = #{icCardno,jdbcType=VARCHAR},
+      IC_CARD_MADE_NO = #{icCardMadeNo,jdbcType=VARCHAR},
+      PUTREC_PSTP_FLAG = #{putrecPstpFlag,jdbcType=VARCHAR},
+      PUTREC_TIME = #{putrecTime,jdbcType=TIMESTAMP},
+      PUTREC_VALID_DATE = #{putrecValidDate,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_ER_NO = #{createErNo,jdbcType=VARCHAR},
+      CREATE_ER_NAME = #{createErName,jdbcType=VARCHAR},
+      MODF_TIME = #{modfTime,jdbcType=TIMESTAMP},
+      MODF_ER_NO = #{modfErNo,jdbcType=VARCHAR},
+      MODF_ER_NAME = #{modfErName,jdbcType=VARCHAR},
+      EMVRY_STUCD = #{emvryStucd,jdbcType=VARCHAR},
+      EMVRY_OPIN_DESC = #{emvryOpinDesc,jdbcType=VARCHAR},
+      RMK = #{rmk,jdbcType=VARCHAR},
+      VALID_FLAG = #{validFlag,jdbcType=VARCHAR},
+      OP_TYPECD = #{opTypecd,jdbcType=VARCHAR},
+      PUTREC_CHG_FLAG = #{putrecChgFlag,jdbcType=VARCHAR},
+      NATIONALITY = #{nationality,jdbcType=VARCHAR}
+    where BTRNB_PRSN_PUTREC_BSC_NO = #{btrnbPrsnPutrecBscNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
