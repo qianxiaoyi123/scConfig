@@ -100,7 +100,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.4</version>
+			<version>1.2.25</version>
 		</dependency>
 		<!--解析json的工具可以和fastjson并行使用
 		解析json对象
