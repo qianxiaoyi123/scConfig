@@ -10,10 +10,11 @@ spring:
         git:
           uri: https://github.com/qianxiaoyi123/scConfig.git #GitHub上面的git仓库名字
         ####搜索目录
-          username: qianxiaoyi123
-          password: qianxiaoyi12
+          #username: qianxiaoyi123
+          #password: qianxiaoyi12
           search-paths:
             - config-repo
+          skip-ssl-validation: true #增加配置跳过ssl认证
       ####读取分支
       label: master
 #rabbitmq相关配置
